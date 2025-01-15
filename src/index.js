@@ -11,17 +11,15 @@ class LinkedList {
         this.length = 0;
     }
     append(value) {
-        function getLastNode(node) {
-            if (node.nextNode == null) {
-                return node;
-            }
-            return getLastNode(node.nextNode);
-        }
-        if (this.head) {
-            let tail = getLastNode(this.head);
-            tail.nextNode = new Node(value, null);
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = newNode;
         } else {
-            this.head = new Node(value, null);
+            let current = this.head;
+            while (current.nextNode) {
+                current = current.nextNode;
+            };
+            current.nextNode = newNode;
         }
         this.length++;
     }
@@ -39,5 +37,3 @@ linkedList.append("first");
 linkedList.append("second");
 linkedList.append("third");
 console.log(linkedList.head);
-
-//how tf do i make the nodes refer to their next thing 
