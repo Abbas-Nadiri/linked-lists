@@ -54,10 +54,16 @@ class LinkedList {
   pop() {
     let current = this.headNode;
     if (!current) return null;
-    while (current?.nextNode.nextNode) {
+    if (!current.nextNode) {
+      this.headNode = null;
+      this.length--;
+      return;
+    }
+    while (current?.nextNode?.nextNode) {
       current = current.nextNode;
     }
     current.nextNode = null;
+    this.length--;
   }
   contains(value) {
     let current = this.headNode;
@@ -117,7 +123,10 @@ class LinkedList {
       return console.log('Index invalid/out of bounds');
     }
     let current = this.headNode;
-    if (index == 0) this.headNode = current.nextNode;
+    if (index == 0) {
+      this.headNode = current.nextNode;
+      this.length--;
+    }
     while (index > 1) {
       current = current.nextNode;
       index--;
@@ -125,6 +134,7 @@ class LinkedList {
     let preceding = current;
     let following = current.nextNode?.nextNode;
     preceding.nextNode = following;
+    this.length--;
   }
 }
 
